@@ -44,12 +44,4 @@ public class Reservation extends BaseEntity {
     public String getCustomerPhone() { return customerPhone; }
     public void setCustomerPhone(String customerPhone) { this.customerPhone = customerPhone; }
 
-    public Boolean getNearWindow() { return nearWindow; }
-    public void setNearWindow(Boolean nearWindow) { this.nearWindow = nearWindow; }
-
-    public Boolean getQuietCorner() { return quietCorner; }
-    public void setQuietCorner(Boolean quietCorner) { this.quietCorner = quietCorner; }
-
-    public Boolean getNearChildren() { return nearChildren; }
-    public void setNearChildren(Boolean nearChildren) { this.nearChildren = nearChildren; }
 }

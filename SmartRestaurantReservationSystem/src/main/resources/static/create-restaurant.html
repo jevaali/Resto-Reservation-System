@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Restaurant</title>
+</head>
+<body>
+<h1>Create a Restaurant</h1>
+
+<form id="restaurantForm">
+  <label for="name">Restaurant Name:</label>
+  <input type="text" id="name" name="name" required>
+  <button type="submit">Create</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+  const form = document.getElementById('restaurantForm');
+  const result = document.getElementById('result');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+
+    try {
+      const response = await fetch('/api/restaurants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create restaurant');
+      }
+
+      const data = await response.json();
+      result.innerText = `Created restaurant with ID: ${data.id}, Name: ${data.name}`;
+      form.reset();
+    } catch (error) {
+      result.innerText = 'Error: ' + error.message;
+    }
+  });
+</script>
+</body>
+</html>

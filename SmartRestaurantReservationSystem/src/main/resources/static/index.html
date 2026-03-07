@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Restaurants</title>
+</head>
+<body>
+<h1>Restaurants</h1>
+<ul id="list"></ul>
+
+<script>
+    fetch("http://localhost:8080/api/restaurants")
+        .then(res => res.json())
+        .then(data => {
+            const list = document.getElementById("list");
+            data.forEach(r => {
+                const li = document.createElement("li");
+                li.innerText = r.name;
+                list.appendChild(li);
+            });
+        });
+</script>
+</body>
+</html>
