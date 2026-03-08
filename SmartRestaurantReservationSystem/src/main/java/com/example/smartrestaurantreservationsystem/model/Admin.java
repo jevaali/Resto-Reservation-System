@@ -17,6 +17,9 @@ public class Admin extends BaseEntity {
 
     private String password;
 
+    @Column(nullable = true)
+    private String role = "ADMIN";
+
     @ManyToMany
     @JoinTable(
             name = "admin_restaurants",
@@ -39,4 +42,7 @@ public class Admin extends BaseEntity {
 
     public List<Restaurant> getRestaurants() { return restaurants; }
     public void setRestaurants(List<Restaurant> restaurants) { this.restaurants = restaurants; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }

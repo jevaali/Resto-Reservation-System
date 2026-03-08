@@ -12,8 +12,15 @@
   <nav>
     <a href="/" th:href="@{/}">Home</a>
     <a href="/privacy" th:href="@{/privacy}">Privacy</a>
-    <a href="/login" th:href="@{/login}">Admin Login</a>
-    <a href="/register" th:href="@{/register}">Register Restaurant</a>
+    <span th:unless="${adminId}">
+      <a href="/login" th:href="@{/login}">Admin Login</a>
+      <a href="/register" th:href="@{/register}">Register Restaurant</a>
+    </span>
+    <span th:if="${adminId}">
+      <span th:text="'Welcome, ' + ${adminName}"></span>
+      <a href="/admin-dashboard" th:href="@{/admin-dashboard}">Admin Dashboard</a>
+      <a href="/logout" th:href="@{/logout}">Logout</a>
+    </span>
   </nav>
 </header>
 

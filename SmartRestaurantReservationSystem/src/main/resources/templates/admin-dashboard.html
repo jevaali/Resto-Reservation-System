@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::content})">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
+</head>
 <body>
 <div th:fragment="content">
   <section class="dashboard-section">
-    <h2>Admin Dashboard</h2>
-    <p id="welcomeMessage">Welcome to the admin dashboard. Here you can manage your restaurant's reservations and settings.</p>
-    <div class="dashboard-grid">
-      <div class="dashboard-card">
-        <h3>Total Reservations</h3>
-        <p id="totalReservations">0</p>
+
+    <!-- Intro text for admin -->
+    <div class="dashboard-intro">
+      <h1>Welcome to your Admin Dashboard</h1>
+      <p>
+        Here you can manage your restaurants, track reservations, and monitor table availability.
+        Use the buttons and cards below to quickly access all features.
+      </p>
+    </div>
+
+    <!-- Add new restaurant action button -->
+    <div class="dashboard-actions">
+      <a th:href="@{/admin/restaurants/new}" class="btn btn-primary">
+        + Add New Restaurant
+      </a>
+    </div>
+
+    <!-- Admin's restaurants grid -->
+    <h2>Your Restaurants</h2>
+    <div class="restaurants-grid">
+      <div th:each="restaurant : ${restaurants}" class="restaurant-card">
+        <a th:href="@{|/admin/restaurants/${restaurant.id}|}">
+          <h3 th:text="${restaurant.name}">Restaurant Name</h3>
+          <p th:text="${restaurant.location}">Location</p>
+          <p class="restaurant-info">Click to view details, edit, or manage reservations</p>
+        </a>
       </div>
-      <div class="dashboard-card">
-        <h3>Today's Reservations</h3>
-        <p id="todayReservations">0</p>
-      </div>
-      <div class="dashboard-card">
-        <h3>Available Tables</h3>
-        <p id="availableTables">0</p>
+
+      <div th:if="${#lists.isEmpty(restaurants)}" class="no-restaurants">
+        <p>You currently have no restaurants registered. Click “Add New Restaurant” above to get started.</p>
       </div>
     </div>
   </section>
+
+  <script th:src="@{/js/admin-dashboard.js}"></script>
 </div>
-<script>
-    // Get admin data from localStorage and display welcome message
-    document.addEventListener('DOMContentLoaded', function() {
-        const adminData = localStorage.getItem('admin');
-        if (adminData) {
-            try {
-                const admin = JSON.parse(adminData);
-                const welcomeMessage = document.getElementById('welcomeMessage');
-                if (welcomeMessage && admin.name) {
-                    welcomeMessage.textContent = `Welcome, ${admin.name}! Here you can manage your restaurant's reservations and settings.`;
-                }
-            } catch (parseError) {
-                console.error('Error parsing admin data from localStorage:', parseError);
-            }
-        } else {
-            console.warn('No admin data found in localStorage');
-        }
-    });
-</script>
 </body>
 </html>

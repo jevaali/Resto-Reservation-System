@@ -5,12 +5,14 @@ export async function registerAdmin(admin) {
         body: JSON.stringify(admin)
     });
 
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: "Registration failed" }));
-        throw new Error(errorData.message || `Registration failed (${response.status})`);
+    const text = await response.text();
+    try {
+        const data = JSON.parse(text);
+        if (!response.ok) throw new Error(data.message || `Registration failed (${response.status})`);
+        return data;
+    } catch {
+        throw new Error(`Unexpected response from server: ${text.substring(0, 100)}`);
     }
-
-    return response.json();
 }
 
 // src/main/resources/static/js/api/adminApi.js
