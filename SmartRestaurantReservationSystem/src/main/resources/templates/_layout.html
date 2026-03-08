@@ -4,24 +4,46 @@
   <meta charset="UTF-8">
   <title th:text="${pageTitle}">Restaurant Reservation System</title>
   <link rel="stylesheet" href="/css/main.css">
+  <script type="module" src="/main.js"></script>
 </head>
 <body>
 
 <header class="navbar">
-  <div class="logo">ReservationSystem</div>
-  <nav>
-    <a href="/" th:href="@{/}">Home</a>
-    <a href="/privacy" th:href="@{/privacy}">Privacy</a>
-    <span th:unless="${adminId}">
-      <a href="/login" th:href="@{/login}">Admin Login</a>
-      <a href="/register" th:href="@{/register}">Register Restaurant</a>
+
+  <div class="nav-left">
+    <a class="logo" th:href="@{/}">
+      <span class="logo-icon">🍽</span>
+      <span class="logo-text">Yum Yum</span>
+    </a>
+  </div>
+
+  <nav class="nav-center">
+
+    <span th:if="${adminId == null}">
+      <a th:href="@{/}">Choose your next feast</a>
     </span>
+
     <span th:if="${adminId}">
-      <span th:text="'Welcome, ' + ${adminName}"></span>
-      <a href="admin-dashboard" th:href="@{admin/admin-dashboard}">Admin Dashboard</a>
-      <a href="/logout" th:href="@{/logout}">Logout</a>
+      <a th:href="@{/admin/admin-dashboard}">Dashboard</a>
+      <a th:href="@{/admin/restaurants}">Restaurants</a>
+      <a th:href="@{/admin/reservations}">Reservations</a>
     </span>
   </nav>
+
+  <div class="nav-right">
+
+    <span th:unless="${adminId}" class="auth-links">
+      <a th:href="@{/login}" class="btn-outline">Admin Login</a>
+      <a th:href="@{/register}" class="btn-primary">Register Restaurant</a>
+    </span>
+
+    <div th:if="${adminId}" class="admin-menu">
+      <span class="admin-name" th:text="${adminName}"></span>
+      <a th:href="@{/logout}" class="logout">Logout</a>
+    </div>
+
+  </div>
+
 </header>
 
 <main>

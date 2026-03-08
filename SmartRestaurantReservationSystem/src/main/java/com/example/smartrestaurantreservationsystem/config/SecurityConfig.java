@@ -35,7 +35,7 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers("/api/admin/register").permitAll()
                         .requestMatchers("/", "/index", "/restaurants/**", "/register",
-                                "/api/restaurant/**", "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                                "/api/restaurant/**", "/api/restaurants", "/api/restaurants?**", "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
                         // Admin-only endpoints
                         .requestMatchers("/admin/**", "/api/admin/**", "/api/restaurants/**").hasRole("ADMIN")
                         // All other endpoints require authentication

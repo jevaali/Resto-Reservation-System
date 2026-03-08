@@ -25,7 +25,7 @@ public class RestaurantController {
     @GetMapping
     public List<Restaurant> searchRestaurants(@RequestParam(required = false) String query) {
         if (query == null || query.isEmpty()) {
-            return restaurantService.searchRestaurants("");
+            return restaurantService.getAllRestaurants();
         }
         return restaurantService.searchRestaurants(query);
     }
@@ -65,8 +65,5 @@ public class RestaurantController {
         }
     }
 
-    @GetMapping("/api/restaurants")
-    public List<Restaurant> getRestaurants(){
-        return restaurantService.getAllRestaurants();
-    }
+
 }

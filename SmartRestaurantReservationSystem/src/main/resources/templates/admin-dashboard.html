@@ -10,30 +10,43 @@
     <div class="dashboard-intro">
       <h1>Welcome to your Admin Dashboard</h1>
       <p>
-        Here you can manage your restaurants, track reservations, and monitor table availability.
+        Manage your restaurants, track reservations, and monitor table availability.
         Use the buttons and cards below to quickly access all features.
       </p>
-    </div>
-
-    <div class="dashboard-actions">
-      <a th:href="@{/admin/restaurants/new}" class="btn btn-primary">
-        + Add New Restaurant
-      </a>
+      <div class="dashboard-actions">
+        <a th:href="@{/admin/restaurants/new}" class="btn btn-add">
+          + Add New Restaurant
+        </a>
+      </div>
     </div>
 
     <h2>Your Restaurants</h2>
     <div class="restaurants-grid">
+
       <div th:each="restaurant : ${restaurants}" class="restaurant-card">
-        <a th:href="@{|/admin/restaurants/${restaurant.id}|}">
+        <div class="restaurant-info">
           <h3 th:text="${restaurant.name}">Restaurant Name</h3>
-           <p th:text="${restaurant.location}">Location</p>
-          <p class="restaurant-info">Click to view details, edit, or manage reservations</p>
-        </a>
+          <p class="restaurant-location">
+            📍 <span th:text="${restaurant.location}">City</span>
+          </p>
+          <p class="restaurant-description">
+            Manage reservations, edit details, or configure settings.
+          </p>
+        </div>
+        <div class="restaurant-actions">
+          <a th:href="@{|/admin/restaurants/${restaurant.id}/reservations|}" class="btn btn-reservations">
+            Reservations
+          </a>
+          <a th:href="@{|/admin/restaurants/${restaurant.id}|}" class="btn btn-settings">
+            Settings (manage hall)
+          </a>
+        </div>
       </div>
 
       <div th:if="${#lists.isEmpty(restaurants)}" class="no-restaurants">
         <p>You currently have no restaurants registered. Click “Add New Restaurant” above to get started.</p>
       </div>
+
     </div>
   </section>
 

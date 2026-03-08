@@ -9,6 +9,21 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    width: 100%;
+}
+
 body {
     font-family: var(--font-family);
     height: 100%;
@@ -271,4 +286,80 @@ footer a:hover {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 40px;
+    background:#1e293b;
+    color:white;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:20px;
+    font-weight:600;
+    text-decoration:none;
+    color:white;
+}
+
+.logo-icon{
+    font-size:22px;
+}
+
+.nav-center{
+    display:flex;
+    gap:24px;
+}
+
+.nav-center a{
+    color:#e2e8f0;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.nav-center a:hover{
+    color:white;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.admin-menu{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-name{
+    font-weight:500;
+}
+
+.btn-primary{
+    background:#3b82f6;
+    padding:8px 14px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+}
+
+.btn-outline{
+    border:1px solid #94a3b8;
+    padding:8px 14px;
+    border-radius:6px;
+    color:#e2e8f0;
+    text-decoration:none;
+}
+
+.logout{
+    color:#f87171;
+    text-decoration:none;
 }
