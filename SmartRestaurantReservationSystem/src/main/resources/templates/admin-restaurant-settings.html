@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="_layout::layout(~{::content})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Settings</title>
+    <th:block th:replace="~{_fragments::css}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/admin-restaurant-settings.css}">
+</head>
+<body>
+<div th:fragment="content">
+    <div class="admin-content">
+        <h1>Restaurant Settings</h1>
+        
+        <div class="restaurant-info">
+            <h2 th:text="${restaurant.name}">Restaurant Name</h2>
+            <p th:text="${restaurant.address}">Restaurant Address</p>
+        </div>
+
+        <div class="hall-management">
+            <h2>Hall Management</h2>
+            <th:block th:if="${#lists.isEmpty(restaurant.halls)}">
+                <div class="add-hall-section">
+                    <h3>Add Hall</h3>
+                    <form id="addHallForm" class="hall-form">
+                        <div class="form-group">
+                            <label for="hallName">Hall Name:</label>
+                            <input type="text" id="hallName" name="hallName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hallWidth">Hall Width (cells):</label>
+                            <input type="number" id="hallWidth" name="hallWidth" min="10" max="50" value="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hallHeight">Hall Height (cells):</label>
+                            <input type="number" id="hallHeight" name="hallHeight" min="10" max="50" value="15" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Hall</button>
+                    </form>
+                </div>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(restaurant.halls)}">
+                <div class="hall-grid-section">
+                    <div class="hall-controls">
+                        <h3>Hall Controls</h3>
+                        <div class="cell-type-selector">
+                            <label>Cell Type:</label>
+                            <select id="cellTypeSelector">
+                                <option value="EMPTY">Empty</option>
+                                <option value="BLOCKED">Blocked</option>
+                                <option value="WINDOW">Window</option>
+                                <option value="TERRACE">Terrace</option>
+                                <option value="CHILDREN">Children</option>
+                                <option value="PRIVATE">Private</option>
+                                <option value="TABLE">Table</option>
+                            </select>
+                        </div>
+                        <div class="table-controls">
+                            <label>Table Size:</label>
+                            <select id="tableSizeSelector">
+                                <option value="4x4">2-4 people (4x4)</option>
+                                <option value="4x6">4-6 people (4x6)</option>
+                                <option value="4x8">6-8 people (4x8)</option>
+                            </select>
+                            <button id="addTableBtn" class="btn btn-primary">Add Table</button>
+                        </div>
+                        <div class="action-buttons">
+                            <button id="saveHallBtn" class="btn btn-success">Save Changes</button>
+                            <button id="clearHallBtn" class="btn btn-warning">Clear All</button>
+                        </div>
+                    </div>
+
+                    <div class="hall-grid-container">
+                        <h3>Hall Grid</h3>
+                        <div id="hallGrid" class="hall-grid"></div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/admin-restaurant-settings.js}"></script>
+</body>
+</html>

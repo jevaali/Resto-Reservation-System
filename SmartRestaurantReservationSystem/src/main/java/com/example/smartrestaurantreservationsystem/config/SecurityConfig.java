@@ -1,6 +1,7 @@
 package com.example.smartrestaurantreservationsystem.config;
 
 import com.example.smartrestaurantreservationsystem.handler.CustomAuthenticationSuccessHandler;
+import com.example.smartrestaurantreservationsystem.handler.CustomLogoutSuccessHandler;
 import com.example.smartrestaurantreservationsystem.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,10 +18,14 @@ public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
     public SecurityConfig(CustomUserDetailsService customUserDetailsService,
-                          CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+                          CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler,
+                          CustomLogoutSuccessHandler customLogoutSuccessHandler) {
         this.customUserDetailsService = customUserDetailsService;
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+        this.customLogoutSuccessHandler = customLogoutSuccessHandler;
     }
 
     @Bean
@@ -50,7 +55,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessHandler(customLogoutSuccessHandler)
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()

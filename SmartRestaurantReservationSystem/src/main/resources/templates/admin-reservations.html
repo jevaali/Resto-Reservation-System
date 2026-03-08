@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::content})">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/admin-reservations.css">
+</head>
+<body>
+<div th:fragment="content">
+  <section class="reservations-section">
+    <div class="reservations-header">
+      <h1>Reservations for <span th:text="${restaurant.name}">Restaurant Name</span></h1>
+      <div class="back-button">
+        <a th:href="@{/admin/admin-dashboard}" class="btn btn-back">
+          ← Back to Dashboard
+        </a>
+      </div>
+    </div>
+
+    <div class="reservations-controls">
+      <div class="date-filter">
+        <label for="reservationDate">Select Date:</label>
+        <input type="date" id="reservationDate" class="form-control">
+        <button id="filterBtn" class="btn btn-filter">Filter</button>
+      </div>
+    </div>
+
+    <div class="reservations-list">
+      <div th:if="${#lists.isEmpty(reservations)}" class="no-reservations">
+        <p>No reservations found for this date.</p>
+      </div>
+      
+      <div th:each="reservation : ${reservations}" class="reservation-card">
+        <div class="reservation-info">
+          <div class="reservation-header">
+            <h3 th:text="${reservation.customerName}">Customer Name</h3>
+            <span class="reservation-party-size" th:text="'Party Size: ' + ${reservation.partySize}">Party Size: 2</span>
+          </div>
+          <div class="reservation-details">
+            <p class="reservation-date" th:text="'Date: ' + ${#temporals.format(reservation.date, 'dd.MM.yyyy')}">Date: 08.03.2026</p>
+            <p class="reservation-time" th:text="'Time: ' + ${#temporals.format(reservation.time, 'HH:mm')}">Time: 18:00</p>
+            <p class="reservation-phone" th:text="'Phone: ' + ${reservation.customerPhone}">Phone: +372 5555 1234</p>
+            <p class="reservation-table" th:text="'Table: ' + ${reservation.table.id}">Table: 1</p>
+          </div>
+        </div>
+        <div class="reservation-actions">
+          <button class="btn btn-edit">Edit</button>
+          <button class="btn btn-delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script th:src="@{/js/admin-reservations.js}"></script>
+</div>
+</body>
+</html>
