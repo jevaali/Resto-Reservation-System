@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::content})">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
+</head>
+<body>
+<div th:fragment="content">
+    <section class="dashboard-section">
+        <div class="form-container">
+            <h1>Add New Restaurant</h1>
+            <p class="form-intro">Fill in the details below to create a new restaurant in your dashboard.</p>
+
+            <form id="restaurantForm" class="restaurant-form">
+                <div class="form-group">
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" id="name" name="name" required placeholder="e.g., The Gourmet Garden">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required placeholder="e.g., 123 Main Street, City Center">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Restaurant</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script type="module" th:src="@{/js/services/admin-restaurant-form.js}"></script>
+</div>
+</body>
+</html>

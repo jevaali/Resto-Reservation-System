@@ -32,13 +32,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // Specific public endpoints first
+                        // Public endpoints
                         .requestMatchers("/api/admin/register").permitAll()
-                        .requestMatchers("/", "/index", "/restaurants/**", "/register", "/api/restaurant/**",
-                                "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                        .requestMatchers("/", "/index", "/restaurants/**", "/register",
+                                "/api/restaurant/**", "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
                         // Admin-only endpoints
-                        .requestMatchers("/admin-dashboard", "/api/admin/login", "/api/admin/dashboard",
-                                "/api/admin/profile", "/api/admin/reservations").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "/api/admin/**", "/api/restaurants/**").hasRole("ADMIN")
                         // All other endpoints require authentication
                         .anyRequest().authenticated()
                 )
@@ -62,7 +61,7 @@ public class SecurityConfig {
                         .expiredUrl("/login?expired=true")
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/admin/register")
+                        .ignoringRequestMatchers("/api/admin/register", "/api/restaurants/**")
                 );
 
         return http.build();

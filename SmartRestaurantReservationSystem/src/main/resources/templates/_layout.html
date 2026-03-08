@@ -18,7 +18,7 @@
     </span>
     <span th:if="${adminId}">
       <span th:text="'Welcome, ' + ${adminName}"></span>
-      <a href="/admin-dashboard" th:href="@{/admin-dashboard}">Admin Dashboard</a>
+      <a href="admin-dashboard" th:href="@{admin/admin-dashboard}">Admin Dashboard</a>
       <a href="/logout" th:href="@{/logout}">Logout</a>
     </span>
   </nav>

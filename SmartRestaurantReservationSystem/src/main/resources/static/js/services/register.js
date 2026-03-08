@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             registerSuccess.style.display = "block";
 
             setTimeout(() => {
-                window.location.href = "/admin-dashboard";
+                window.location.href = "admin/admin-dashboard";
             }, 1000);
 
         } catch (error) {

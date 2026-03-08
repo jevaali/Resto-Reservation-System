@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::content})">
 <head>
-  <link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
+   <link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
 </head>
 <body>
 <div th:fragment="content">
   <section class="dashboard-section">
 
-    <!-- Intro text for admin -->
     <div class="dashboard-intro">
       <h1>Welcome to your Admin Dashboard</h1>
       <p>
@@ -16,20 +15,18 @@
       </p>
     </div>
 
-    <!-- Add new restaurant action button -->
     <div class="dashboard-actions">
       <a th:href="@{/admin/restaurants/new}" class="btn btn-primary">
         + Add New Restaurant
       </a>
     </div>
 
-    <!-- Admin's restaurants grid -->
     <h2>Your Restaurants</h2>
     <div class="restaurants-grid">
       <div th:each="restaurant : ${restaurants}" class="restaurant-card">
         <a th:href="@{|/admin/restaurants/${restaurant.id}|}">
           <h3 th:text="${restaurant.name}">Restaurant Name</h3>
-          <p th:text="${restaurant.location}">Location</p>
+           <p th:text="${restaurant.location}">Location</p>
           <p class="restaurant-info">Click to view details, edit, or manage reservations</p>
         </a>
       </div>

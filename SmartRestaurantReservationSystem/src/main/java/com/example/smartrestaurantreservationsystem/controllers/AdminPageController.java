@@ -32,12 +32,31 @@ public class AdminPageController {
         String email = ((User) auth.getPrincipal()).getUsername();
         Admin admin = adminService.findByEmail(email);
 
+        model.addAttribute("adminId", admin.getId());
         model.addAttribute("adminName", admin.getName());
         model.addAttribute("pageTitle", "Admin Dashboard");
 
-        model.addAttribute("content", "admin-dashboard :: adminContent");
+        model.addAttribute("content", "admin-dashboard :: content");
         model.addAttribute("restaurants", admin.getRestaurants());
 
-        return "_layout";
+        return "admin-dashboard";
+    }
+
+    @GetMapping("/restaurants/new")
+    public String newRestaurantForm(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            return "redirect:/login";
+        }
+
+        String email = ((User) auth.getPrincipal()).getUsername();
+        Admin admin = adminService.findByEmail(email);
+
+        model.addAttribute("adminId", admin.getId());
+        model.addAttribute("adminName", admin.getName());
+        model.addAttribute("pageTitle", "Add New Restaurant");
+        model.addAttribute("content", "admin-restaurant-form :: content");
+
+        return "admin-restaurant-form";
     }
 }

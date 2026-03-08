@@ -25,20 +25,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        // Get user email from authentication
         String email = ((UserDetails) authentication.getPrincipal()).getUsername();
 
-        // Find the admin by email
         Admin admin = adminService.findByEmail(email);
 
-        // Store admin information in session
         HttpSession session = request.getSession();
         session.setAttribute("adminId", admin.getId());
         session.setAttribute("adminName", admin.getName());
         session.setAttribute("adminEmail", admin.getEmail());
         session.setAttribute("adminRole", admin.getRole());
 
-        // Redirect to admin dashboard
-        response.sendRedirect("/admin-dashboard");
+        response.sendRedirect("admin/admin-dashboard");
     }
 }

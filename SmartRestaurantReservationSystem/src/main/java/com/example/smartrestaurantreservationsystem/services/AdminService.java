@@ -48,4 +48,8 @@ public class AdminService {
         dto.setRole(admin.getRole());
         return dto;
     }
+
+    public Admin save(Admin admin) {
+        return adminRepository.save(admin);
+    }
 }

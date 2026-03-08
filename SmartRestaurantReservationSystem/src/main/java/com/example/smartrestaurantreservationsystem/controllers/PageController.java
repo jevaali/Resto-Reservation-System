@@ -36,13 +36,6 @@ public class PageController {
         return "privacy";
     }
 
-    @GetMapping("/admin-dashboard")
-    public String adminDashboard(Model model, HttpSession session){
-        addSessionAttributesToModel(model, session);
-        model.addAttribute("pageTitle", "Admin Dashboard");
-        return "admin-dashboard";
-    }
-
     private void addSessionAttributesToModel(Model model, HttpSession session) {
         model.addAttribute("adminId", session.getAttribute("adminId"));
         model.addAttribute("adminName", session.getAttribute("adminName"));
