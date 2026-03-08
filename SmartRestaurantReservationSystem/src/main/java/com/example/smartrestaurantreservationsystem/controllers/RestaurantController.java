@@ -29,4 +29,10 @@ public class RestaurantController {
     public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
         return restaurantService.createRestaurant(restaurant.getName());
     }
+
+
+    @GetMapping("/api/restaurants")
+    public List<Restaurant> getRestaurants(){
+        return restaurantService.getAllRestaurants();
+    }
 }

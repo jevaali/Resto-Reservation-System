@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::content})">
+<body>
+<div th:fragment="content">
+  <section class="hero">
+    <h1>Restaurant Reservation System</h1>
+    <p>Find and reserve tables easily in your favorite restaurants.</p>
+  </section>
+
+  <section class="restaurant-section">
+    <h2>Available Restaurants</h2>
+    <div id="restaurant-list" class="restaurant-grid">
+      <!-- restaurant cards will be inserted here -->
+    </div>
+  </section>
+</div>
+</body>
+</html>
